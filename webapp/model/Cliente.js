@@ -1,7 +1,7 @@
 sap.ui.define([
 	"sap/ui/base/Object",
 	"sap/ui/core/ws/WebSocket",
-], function (Object) {
+], function (Object, WebSocket) {
 	"use strict";
 
 	let instance;
@@ -9,11 +9,11 @@ sap.ui.define([
 	let Cliente = Object.extend("iamsoft.filav.cliente.model.Cliente", {
 		
 		constructor: function () {
-			this._socket = new WebSocket("/fila/");
-			this._socket._attachOpen( () => {
+			this._socket = new WebSocket("ws://"+window.location.host+"/fila/");
+			this._socket.attachOpen( () => {
 				// @todo
 			});
-			this._socket._attachMessage( () => {
+			this._socket.attachMessage( () => {
 				// @todo
 			});
 		},
