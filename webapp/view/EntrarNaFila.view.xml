@@ -45,6 +45,9 @@
                                 </Select>
                             </f:fields>
                         </f:FormElement>
+                        <f:FormElement>
+                            <Button text="Entrar" type="Emphasized" press="onEntrar" id="entrarButton"></Button>
+                        </f:FormElement>
                     </f:formElements>
                 </f:FormContainer>
             </f:Form>
