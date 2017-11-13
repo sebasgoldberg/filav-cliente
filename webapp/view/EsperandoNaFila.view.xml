@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="iamsoft.filav.cliente.controller.EntrarNaFila"
+	controllerName="iamsoft.filav.cliente.controller.EsperandoNaFila"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
 	xmlns="sap.m">
@@ -8,7 +8,7 @@
         id="page"
         title="{i18n>title}">
         <content>
-            <Input value="Entrar Na Fila"></Input>
+            <Input value="Esperando Na Fila"></Input>
         </content>
     </Page>
 

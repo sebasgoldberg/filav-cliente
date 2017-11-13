@@ -68,12 +68,22 @@
 					"pattern": "entrar-na-fila",
 					"name": "entrarNaFila",
 					"target": ["entrarNaFila"]
+				},
+				{
+					"pattern": "esperando-na-fila",
+					"name": "EsperandoNaFila",
+					"target": ["esperandoNaFila"]
 				}
 			],
 			"targets": {
 				"entrarNaFila": {
-					"viewName": "EntrarNaFila"
-				}	
+					"viewName": "EntrarNaFila",
+					"viewLevel": 10
+				},
+				"esperandoNaFila": {
+					"viewName": "EsperandoNaFila",
+					"viewLevel": 20
+				}
 			}
 		},
 		"resources": {
