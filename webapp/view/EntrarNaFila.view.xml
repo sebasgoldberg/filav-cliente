@@ -1,0 +1,138 @@
+<mvc:View
+	controllerName="iamsoft.filav.cliente.controller.EntrarNaFila"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns="sap.m">
+
+    <Page
+        id="page"
+        title="{i18n>title}">
+        <content>
+            <Input></Input>
+        </content>
+    </Page>
+
+<!-- <mvc:View
+		height="100%"
+		xmlns:core="sap.ui.core"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns="sap.m"
+		xmlns:semantic="sap.m.semantic"
+		displayBlock="true"
+        xmlns:l="sap.ui.layout"
+        xmlns:f="sap.ui.layout.form"
+        controllerName="iamsoft.agroeco.controller.AddItemForm">
+
+    <semantic:DetailPage
+            title="Agregar Item a Lista {list>name}"
+            showNavButton="true"
+		    navButtonPress="onNavBack"
+            id="addItemFormPage">
+
+        <f:Form editable="true">
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false" />
+            </f:layout>
+            <f:FormContainer>
+                <f:formElements>
+                    <f:FormElement label="Proveedor">
+                        <f:fields>
+                            <Select
+                                id="vendorsSelect"
+                                change="onChangeVendor"
+                                forceSelection="true"
+                                selectedKey="{form>/vendor}"
+                                items="{
+                                    path: 'vendors>/',
+                                    sorter: { path: 'name' }
+                                }">
+                                <core:Item key="{vendors>id}" text="{vendors>name}" />
+                            </Select>
+                        </f:fields>
+                    </f:FormElement>
+
+                    <f:FormElement label="Producto">
+                        <f:fields>
+                            <SearchField width="100%" 
+                                value="{form>/search}"
+                                liveChange="onSearchProduct"
+                                />
+                        </f:fields>
+                    </f:FormElement>
+
+                </f:formElements>
+            </f:FormContainer>
+        </f:Form>
+
+        <Table
+            id="productsTable"
+            headerText="Productos"
+            mode="MultiSelect"
+            keyboardMode="Edit"
+            items="{
+                path:'products>/',
+                sorter: {
+                    path: 'product/title',
+                    descending: false,
+                    group: false
+                }
+            }" >
+        
+            <columns>
+                <Column>
+                    <header>
+                        <Text text="Producto" />
+                    </header>
+                </Column>
+                <Column
+                    minScreenWidth="Tablet"
+                    demandPopin="true"
+                    hAlign="Center" >
+                    <header>
+                        <Text text="Cantidad Requerida" />
+                    </header>
+                </Column>
+            </columns>
+            <items>
+                <ColumnListItem>
+                    <cells>
+                        <ObjectIdentifier title="{products>product/title}" text="" />
+                        <Input 
+                            editable="true"
+                            submit="onSubmitQuantity"
+                            liveChange="onQuantityChange"
+                            value="{
+                                parts: [{path: 'products>quantity'}, {path: 'products>uom/name'}],
+                                type: 'sap.ui.model.type.Currency',
+                                formatOptions: {
+                                    showMeasure: true
+                                } 
+                            }" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+
+        <semantic:customFooterContent>
+            <Button text="Adicionar" type="Emphasized" press="onAdd" id="addButton"></Button>
+            <Button text="Cancelar" type="Rejects" press="onCancel" id="cancelButton"></Button>
+        </semantic:customFooterContent>
+
+    </semantic:DetailPage>
+
+</mvc:View> -->
+
+</mvc:View>
