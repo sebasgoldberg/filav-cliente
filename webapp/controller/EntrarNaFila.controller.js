@@ -1,12 +1,15 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"iamsoft/filav/cliente/controller/BaseController",
+	"sap/ui/model/json/JSONModel",
+], function(BaseController, JSONModel) {
 	"use strict";
 
-	return Controller.extend("iamsoft.filav.cliente.controller.EntrarNaFila", {
+	return BaseController.extend("iamsoft.filav.cliente.controller.EntrarNaFila", {
 
 		onInit: function () {
+            BaseController.prototype.onInit.bind(this)();
+            this.loadAndBindModel('filas');
+        },
 
-		}
 	});
 });

@@ -1,14 +1,54 @@
 <mvc:View
 	controllerName="iamsoft.filav.cliente.controller.EntrarNaFila"
-	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
+    xmlns:f="sap.ui.layout.form"
 	xmlns="sap.m">
 
     <Page
         id="page"
         title="{i18n>title}">
         <content>
-            <Input value="Entrar Na Fila"></Input>
+
+
+            <f:Form editable="true">
+                <f:layout>
+                    <f:ResponsiveGridLayout
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="4"
+                        emptySpanL="4"
+                        emptySpanM="4"
+                        emptySpanS="0"
+                        columnsXL="1"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false" />
+                </f:layout>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="Fila">
+                            <f:fields>
+                                <Select
+                                    id="filaSelect"
+                                    forceSelection="true"
+                                    selectedKey="{form>/fila}"
+                                    items="{
+                                        path: '/',
+                                        sorter: { path: 'nome' }
+                                    }">
+                                    <core:Item key="{id}" text="{nome}" />
+                                </Select>
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:Form>
+
         </content>
     </Page>
 

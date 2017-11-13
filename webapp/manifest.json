@@ -10,7 +10,13 @@
 		"title": "{{appTitle}}",
 		"description": "{{appDescription}}",
 		"resources": "resources.json",
-		"ach": "ach"
+		"ach": "ach",
+		"dataSources": {
+			"mainService": {
+				"uri": "",
+				"type": "JSON"
+			}
+		}
 	},
 
 	"sap.ui": {
