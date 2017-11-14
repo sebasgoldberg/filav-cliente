@@ -7,23 +7,24 @@ sap.ui.define([
 
 	return BaseController.extend("iamsoft.filav.cliente.controller.EntrarNaFila", {
 
-		onInit: function () {
+      onInit: function () {
+          BaseController.prototype.onInit.bind(this)();
 
-            BaseController.prototype.onInit.bind(this)();
+          let oModel = new JSONModel({
+            fila: "",
+          });
+          this.getView().setModel(oModel, 'form');
+          this.getView().bindElement({path: '/', model: 'form'})
 
-			let oModel = new JSONModel({
-				fila: "",
-			});
-			this.getView().setModel(oModel, 'form');
-			this.getView().bindElement({path: '/', model: 'form'})
+          this.loadAndBindModel('filas');
 
-            this.loadAndBindModel('filas');
-        },
+          Cliente.getInstance();
+      },
 
-        onEntrar(oEvent){
-            let form = this.getModel('form').getData();
-            Cliente.getInstance().entrarNaFila(form.fila)
-        }
+      onEntrar(oEvent){
+          let form = this.getModel('form').getData();
+          Cliente.getInstance().entrarNaFila(form.fila);
+      }
 
 	});
 });
