@@ -4,12 +4,27 @@
 	displayBlock="true"
 	xmlns="sap.m">
 
-    <Page
-        id="page"
-        title="{i18n>title}">
-        <content>
             <Input value="Esperando Na Fila"></Input>
-        </content>
-    </Page>
+
+	<List
+		items="{/}"
+		headerText="Turnos">
+		<items>
+			<ObjectListItem
+				title="{id}"
+				type="Active"
+				number="3º"
+				numberUnit="posição">
+				<firstStatus>
+					<ObjectStatus
+						text="{estado}"
+						state="success" />
+				</firstStatus>
+				<attributes>
+					<ObjectAttribute text="HH:MM" />
+				</attributes>
+			</ObjectListItem>
+		</items>
+	</List>
 
 </mvc:View>

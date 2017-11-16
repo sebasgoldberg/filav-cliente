@@ -1,12 +1,20 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function(Controller) {
+	"iamsoft/filav/cliente/controller/BaseController",
+], function(BaseController) {
 	"use strict";
 
-	return Controller.extend("iamsoft.filav.cliente.controller.EsperandoNaFila", {
+	return BaseController.extend("iamsoft.filav.cliente.controller.EsperandoNaFila", {
 
 		onInit: function () {
+            BaseController.prototype.onInit.bind(this)();
+			this.refresh();
+        },
 
-		}
+
+        refresh(){
+			this.loadAndBindModel('cliente/turnos/ativos');
+        }
+    
+
 	});
 });

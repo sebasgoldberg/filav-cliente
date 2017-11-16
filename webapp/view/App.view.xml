@@ -1,8 +1,35 @@
 <mvc:View
+
 	controllerName="iamsoft.filav.cliente.controller.App"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
 	xmlns="sap.m">
 	<App id="app">
+    <pages>
+      <Page>
+        <content>
+
+  <IconTabBar
+    id="idIconTabBarMulti"
+    expanded="{device>/isNoPhone}"
+    class="sapUiResponsiveContentPadding">
+    <items>
+      <IconTabFilter
+        text="Entrar..."
+        icon="sap-icon://hint">
+          <mvc:XMLView viewName="iamsoft.filav.cliente.view.EntrarNaFila"/>
+      </IconTabFilter>
+      <IconTabFilter
+        text="Esperando..."
+        icon="sap-icon://attachment"
+        count="">
+          <mvc:XMLView viewName="iamsoft.filav.cliente.view.EsperandoNaFila"/>
+      </IconTabFilter>
+    </items>
+  </IconTabBar>
+
+        </content>
+      </Page>
+    </pages>
 	</App>
 </mvc:View>
