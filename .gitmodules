@@ -1,0 +1,3 @@
+[submodule "webapp/resources/openui5-qrcode"]
+	path = webapp/resources/openui5-qrcode
+	url = https://github.com/jpenninkhof/openui5-qrcode.git

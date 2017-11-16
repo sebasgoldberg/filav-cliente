@@ -4,8 +4,14 @@
     xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
     xmlns:f="sap.ui.layout.form"
+    xmlns:p="com.penninkhof.controls"
 	xmlns="sap.m">
 
+
+				<FlexBox
+					alignItems="Center"
+					justifyContent="Center">
+					<items>
 
             <f:Form editable="true">
                 <f:layout>
@@ -46,5 +52,20 @@
                     </f:formElements>
                 </f:FormContainer>
             </f:Form>
+
+					</items>
+				</FlexBox>
+
+				<FlexBox
+					alignItems="Center"
+					justifyContent="Center">
+					<items>
+
+					<Panel class="sapUiResponsiveMargin">
+						<p:QRCode code="Awesome code" />
+					</Panel>
+
+					</items>
+				</FlexBox>
 
 </mvc:View>
