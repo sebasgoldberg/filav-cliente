@@ -12,7 +12,11 @@ sap.ui.define([
 			this._socket.connect("/fila/");
 			this._socket.listen( (action, stream) => {
 				// @todo
-        console.log(action);
+                console.log(action);
+                if (action.message == 'QR_CODE'){
+                    var eventBus = sap.ui.getCore().getEventBus();
+                    eventBus.publish("CLIENTE", "QR_CODE", action.data.qrcode); 
+                }
 			});
 		},
 

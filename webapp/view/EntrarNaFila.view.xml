@@ -37,7 +37,7 @@
                                 <Select
                                     id="filaSelect"
                                     forceSelection="true"
-                                    selectedKey="{form>/fila}"
+                                    selectedKey="{view>/form/fila}"
                                     items="{
                                         path: '/',
                                         sorter: { path: 'nome' }
@@ -62,7 +62,7 @@
 					<items>
 
 					<Panel class="sapUiResponsiveMargin">
-						<p:QRCode code="Awesome code" />
+						<p:QRCode code="{view>/qrcode}" />
 					</Panel>
 
 					</items>

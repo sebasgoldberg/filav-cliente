@@ -7,24 +7,37 @@ sap.ui.define([
 
 	return BaseController.extend("iamsoft.filav.cliente.controller.EntrarNaFila", {
 
-      onInit: function () {
-          BaseController.prototype.onInit.bind(this)();
+        onInit: function () {
+            BaseController.prototype.onInit.bind(this)();
 
-          let oModel = new JSONModel({
-            fila: "",
-          });
-          this.getView().setModel(oModel, 'form');
-          this.getView().bindElement({path: '/', model: 'form'})
+            var eventBus = sap.ui.getCore().getEventBus();
+            eventBus.subscribe("CLIENTE", "QR_CODE", this.onQrCode, this);
 
-          this.loadAndBindModel('filas');
+            let oModel = new JSONModel({
+                form: {
+                    fila: "",
+                },
+                qrcode: "",
+            });
+            this.getView().setModel(oModel, 'view');
+            this.getView().bindElement({path: '/', model: 'view'})
 
-          Cliente.getInstance();
-      },
+            this.loadAndBindModel('filas');
 
-      onEntrar(oEvent){
-          let form = this.getModel('form').getData();
-          Cliente.getInstance().entrarNaFila(form.fila);
-      }
+            Cliente.getInstance();
+        },
+
+        onQrCode: function(channel, event, qrcode){
+            let oModel = this.getModel('view');
+            let view = oModel.getData();
+            view.qrcode = qrcode;
+            oModel.refresh();
+        },
+
+        onEntrar(oEvent){
+            let view = this.getModel('view').getData();
+            Cliente.getInstance().entrarNaFila(view.form.fila);
+        },
 
 	});
 });
