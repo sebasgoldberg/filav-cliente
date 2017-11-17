@@ -2,7 +2,8 @@ sap.ui.define([
 	"iamsoft/filav/cliente/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"iamsoft/filav/cliente/model/Cliente",
-], function(BaseController, JSONModel, Cliente) {
+    'sap/m/MessageToast',
+], function(BaseController, JSONModel, Cliente, MessageToast) {
 	"use strict";
 
 	return BaseController.extend("iamsoft.filav.cliente.controller.EntrarNaFila", {
@@ -28,6 +29,7 @@ sap.ui.define([
         },
 
         onQrCode: function(channel, event, qrcode){
+            MessageToast.show(qrcode);
             let oModel = this.getModel('view');
             let view = oModel.getData();
             view.qrcode = qrcode;
