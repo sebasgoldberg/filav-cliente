@@ -22,7 +22,7 @@ sap.ui.define([
     };
 
 
-    let WebSocket = function(path="/fila/"){
+    let UI5WebSocket = function(path="/fila/"){
 
         this._socket = new WebSocket("ws://"+window.location.host+path);
 
