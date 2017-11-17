@@ -15,6 +15,10 @@ sap.ui.define([
                     var eventBus = sap.ui.getCore().getEventBus();
                     eventBus.publish("CLIENTE", "QR_CODE", data.data.qrcode); 
                 }
+                else if (data.message == 'FILAS_DISPONIBLES'){
+                    var eventBus = sap.ui.getCore().getEventBus();
+                    eventBus.publish("CLIENTE", "FILAS_DISPONIBLES", data.data.filas); 
+                }
 			});
 		},
 

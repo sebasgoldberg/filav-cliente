@@ -9,11 +9,14 @@
 
 
 				<FlexBox
+                visible="{view>/form/visible}"
 					alignItems="Center"
-					justifyContent="Center">
+					justifyContent="Center"
+                    >
 					<items>
 
-            <f:Form editable="true">
+            <f:Form editable="true"
+                >
                 <f:layout>
                     <f:ResponsiveGridLayout
                         labelSpanXL="3"
@@ -47,7 +50,14 @@
                             </f:fields>
                         </f:FormElement>
                         <f:FormElement>
-                            <Button text="Entrar" type="Emphasized" press="onEntrar" id="entrarButton"></Button>
+                            <Button text="Entrar" type="Emphasized"
+                                press="onEntrar" id="entrarButton">
+                            </Button>
+                        </f:FormElement>
+                        <f:FormElement>
+                            <Button text="Cancelar" type="Neutral"
+                                press="onCancelar" id="cancelarButton">
+                            </Button>
                         </f:FormElement>
                     </f:formElements>
                 </f:FormContainer>
@@ -57,12 +67,14 @@
 				</FlexBox>
 
 				<FlexBox
+                        visible="{view>/qrcode/visible}"
 					alignItems="Center"
 					justifyContent="Center">
 					<items>
 
-					<Panel class="sapUiResponsiveMargin">
-						<p:QRCode code="{view>/qrcode}" />
+					<Panel class="sapUiResponsiveMargin"
+                        >
+						<p:QRCode code="{view>/qrcode/qrcode}" />
 					</Panel>
 
 					</items>
