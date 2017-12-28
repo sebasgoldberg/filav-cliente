@@ -22,8 +22,8 @@ sap.ui.define([
 			});
 		},
 
-		entrarNaFila: function(fila){
-			this._socket.send({message: 'ENTRAR_NA_FILA', fila: fila})
+		entrarNaFila: function(fila, qrcode){
+			this._socket.send({message: 'ENTRAR_NA_FILA',  data: {fila: fila, qrcode: qrcode}})
 		},
 
 	});

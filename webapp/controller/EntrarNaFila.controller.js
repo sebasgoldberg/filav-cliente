@@ -78,7 +78,8 @@ sap.ui.define([
 
         onEntrar(oEvent){
             let view = this.getModel('view').getData();
-            Cliente.getInstance().entrarNaFila(view.form.fila);
+            Cliente.getInstance().entrarNaFila(view.form.fila,
+                view.qrcode.qrcode);
             this.setQrCodeVisible();
             this.setFormVisible(false);
         },
