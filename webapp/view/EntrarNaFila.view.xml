@@ -1,5 +1,6 @@
 <mvc:View
 	controllerName="iamsoft.filav.cliente.controller.EntrarNaFila"
+    xmlns:l="sap.ui.layout"
 	xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
@@ -79,5 +80,7 @@
 
 					</items>
 				</FlexBox>
+
+
 
 </mvc:View>

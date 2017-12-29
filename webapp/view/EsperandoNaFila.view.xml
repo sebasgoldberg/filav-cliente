@@ -1,30 +1,28 @@
 <mvc:View
-	controllerName="iamsoft.filav.cliente.controller.EsperandoNaFila"
+	controllerName="iamsoft.filav.cliente.controller.EntrarNaFila"
+    xmlns:l="sap.ui.layout"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
 	xmlns="sap.m">
 
-            <Input value="Esperando Na Fila"></Input>
 
-	<List
-		items="{/}"
-		headerText="Turnos">
-		<items>
-			<ObjectListItem
-				title="{id}"
-				type="Active"
-				number="3º"
-				numberUnit="posição">
-				<firstStatus>
-					<ObjectStatus
-						text="{estado}"
-						state="success" />
-				</firstStatus>
-				<attributes>
-					<ObjectAttribute text="HH:MM" />
-				</attributes>
-			</ObjectListItem>
-		</items>
+	<l:VerticalLayout
+			class="sapUiContentPadding"
+			width="100%">
+		<l:content>
+	<List class="sapContrast sapContrastPlus" items="{notificacoes>/}">
+		<NotificationListItem
+				title="{notificacoes>title}"
+				description="{notificacoes>description}"
+				showCloseButton="true"
+				datetime="{notificacoes>creationDate}"
+				unread="true"
+				priority="{notificacoes>priority}"
+				close="onItemClose"
+				 >
+		</NotificationListItem>
 	</List>
+		</l:content>
+	</l:VerticalLayout>
 
 </mvc:View>

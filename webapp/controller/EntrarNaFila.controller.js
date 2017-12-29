@@ -14,6 +14,7 @@ sap.ui.define([
             var eventBus = sap.ui.getCore().getEventBus();
             eventBus.subscribe("CLIENTE", "QR_CODE", this.onQrCode, this);
             eventBus.subscribe("CLIENTE", "FILAS_DISPONIBLES", this.onFilasDisponibles, this);
+            eventBus.subscribe("CLIENTE", "TURNO_ATIVO", this.onTurnoAtivo, this);
 
             let oModel = new JSONModel({
                 form: {
@@ -33,10 +34,38 @@ sap.ui.define([
             this.getView().setModel(oModel);
             this.getView().bindElement({path: '/'})
 
+            oModel = new JSONModel([]);
+            this.getView().setModel(oModel, 'notificacoes');
+            this.getView().bindElement({path: '/', model: 'notificacoes'})
+
             Cliente.getInstance();
         },
 
-        onFilasDisponibles: function(channel, event, filas){
+		onItemClose: function (oEvent) {
+			let oNotificacao = oEvent.getSource().getBindingContext().getObject();
+            let oModel = this.getModel('notificacoes');
+            let aNotificacoes = oModel.getData();
+            aNotificacoes.splice(aNotificacoes.indexOf(oNotificacao));
+			oModel.refresh();
+		},
+
+        addNotificacao: function(event, data){
+            let oModel = this.getModel('notificacoes');
+            let notificacoes = oModel.getData();
+            notificacoes.unshift({
+                title: event,
+                description: "",
+                datetime: String(Date()),
+                priority: "Low",
+                });
+            oModel.setData(notificacoes)
+            oModel.refresh();
+        },
+
+        onFilasDisponibles: function(channel, event, data){
+            this.addNotificacao(event, data);
+
+            let filas = data.filas;
             console.log(filas);
 
             let oModel = this.getModel();
@@ -52,7 +81,10 @@ sap.ui.define([
             this.setFormVisible();
         },
 
-        onQrCode: function(channel, event, qrcode){
+        onQrCode: function(channel, event, data){
+			this.addNotificacao(event, data);
+
+            let qrcode = data.qrcode;
             MessageToast.show(qrcode);
             let oModel = this.getModel('view');
             let view = oModel.getData();
@@ -60,6 +92,12 @@ sap.ui.define([
             oModel.refresh();
             this.setQrCodeVisible();
             this.setFormVisible(false);
+        },
+
+        onTurnoAtivo: function(channel, event, data){
+			this.addNotificacao(event, data);
+
+            let turno = data.turno;
         },
 
         setQrCodeVisible(visible=true){

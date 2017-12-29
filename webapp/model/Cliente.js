@@ -11,16 +11,14 @@ sap.ui.define([
 		constructor: function () {
 			this._socket = new Socket('/fila/');
 			this._socket.listen( data => {
-                if (data.message == 'QR_CODE'){
-                    var eventBus = sap.ui.getCore().getEventBus();
-                    eventBus.publish("CLIENTE", "QR_CODE", data.data.qrcode); 
-                }
-                else if (data.message == 'FILAS_DISPONIBLES'){
-                    var eventBus = sap.ui.getCore().getEventBus();
-                    eventBus.publish("CLIENTE", "FILAS_DISPONIBLES", data.data.filas); 
-                }
+                this.publishToEventBus(data.message, data.data);
 			});
 		},
+
+        publishToEventBus: function(event, data){
+            var eventBus = sap.ui.getCore().getEventBus();
+            eventBus.publish("CLIENTE", event, data); 
+        },
 
 		entrarNaFila: function(fila, qrcode){
 			this._socket.send({message: 'ENTRAR_NA_FILA',  data: {fila: fila, qrcode: qrcode}})
