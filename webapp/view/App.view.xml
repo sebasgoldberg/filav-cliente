@@ -1,39 +1,38 @@
 <mvc:View
 
-	controllerName="iamsoft.filav.cliente.controller.App"
+	controllerName="iamsoft.filav.cliente.controller.EntrarNaFila"
 	xmlns:mvc="sap.ui.core.mvc"
 	displayBlock="true"
 	xmlns="sap.m">
 	<App id="app">
     <pages>
-      <Page>
+      <Page title="{i18n>title}">
         <content>
 
 	<ObjectHeader
-		binding="{/ProductCollection/0}"
-		title="{Name}"
-		number="{
-			parts:[{path:'Price'},{path:'CurrencyCode'}],
-			type: 'sap.ui.model.type.Currency',
-			formatOptions: {showMeasure: false}
-		}"
-		numberUnit="{CurrencyCode}" >
+		binding="{turno>/}"
+        title="{
+            path: 'turno>/',
+            formatter: '.formatter.turnoStatusTitle'
+            }"
+		number="{turno>posicao}º Posição"
+		numberUnit="" >
 		<statuses>
 			<ObjectStatus
-				text="Some Damaged"
-				state="Error" />
-			<ObjectStatus
-				text="In Stock"
-				state="Success" />
+				text="{
+                    path: 'turno>/',
+                    formatter: '.formatter.turnoStatusText'
+                    }"
+				state="{
+                    path: 'turno>/',
+                    formatter: '.formatter.turnoStatusState'
+                    }" />
 		</statuses>
 		<attributes>
-			<ObjectAttribute text="{WeightMeasure} {WeightUnit}" />
-			<ObjectAttribute text="{Width} x {Depth} x {Height} {DimUnit}" />
-			<ObjectAttribute text="{Description}" />
-			<ObjectAttribute
-				text="www.sap.com"
-				active="true"
-				press="handleLinkObjectAttributePress" />
+			<ObjectAttribute text="Local: {turno>fila/local/nome}" />
+			<ObjectAttribute text="Fila: {turno>fila/nome}" />
+			<ObjectAttribute text="Posto: {turno>posto/nome}" />
+			<ObjectAttribute text="Ingresso: {turno>creation_date}" />
 		</attributes>
 	</ObjectHeader>
 

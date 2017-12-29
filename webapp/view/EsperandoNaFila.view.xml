@@ -10,7 +10,8 @@
 			class="sapUiContentPadding"
 			width="100%">
 		<l:content>
-	<List class="sapContrast sapContrastPlus" items="{notificacoes>/}">
+	<List class="sapContrast sapContrastPlus" items="{notificacoes>/}"
+        noDataText="Sem Notificações">
 		<NotificationListItem
 				title="{notificacoes>title}"
 				description="{notificacoes>description}"

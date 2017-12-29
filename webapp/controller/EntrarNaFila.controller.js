@@ -3,10 +3,13 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"iamsoft/filav/cliente/model/Cliente",
     'sap/m/MessageToast',
-], function(BaseController, JSONModel, Cliente, MessageToast) {
+    "iamsoft/filav/cliente/model/formatter",
+], function(BaseController, JSONModel, Cliente, MessageToast, formatter) {
 	"use strict";
 
 	return BaseController.extend("iamsoft.filav.cliente.controller.EntrarNaFila", {
+
+        formatter: formatter,
 
         onInit: function () {
             BaseController.prototype.onInit.bind(this)();
@@ -29,10 +32,9 @@ sap.ui.define([
             this.getView().setModel(oModel, 'view');
             this.getView().bindElement({path: '/', model: 'view'})
 
-            //this.loadAndBindModel('filas');
-            oModel = new JSONModel([]);
-            this.getView().setModel(oModel);
-            this.getView().bindElement({path: '/'})
+            oModel = new JSONModel({});
+            this.getView().setModel(oModel, 'turno');
+            this.getView().bindElement({path: '/', model: 'turno'})
 
             oModel = new JSONModel([]);
             this.getView().setModel(oModel, 'notificacoes');
@@ -49,14 +51,28 @@ sap.ui.define([
 			oModel.refresh();
 		},
 
+        getDescricaoNotificacao: function(event, data){
+            switch(event){
+                case 'QR_CODE':
+                    return "Para entrar numa fila, por favor passar "+
+                    "o codigo QR por algum dos scanners disponiveis.";
+                case 'TURNO_ATIVO':
+                    return "Você já tem turno para ser atendido, o "+
+                    "estado atual é: "+data.turno.texto_estado;
+                case 'FILAS_DISPONIBLES':
+                    return "Por favor selecione a fila em que você "+
+                        "deseja ingressar."
+            };
+        },
+
         addNotificacao: function(event, data){
             let oModel = this.getModel('notificacoes');
             let notificacoes = oModel.getData();
             notificacoes.unshift({
                 title: event,
-                description: "",
+                description: this.getDescricaoNotificacao(event, data),
                 datetime: String(Date()),
-                priority: "Low",
+                priority: data.turno&&data.turno.estado==3?"Medium":"Low",
                 });
             oModel.setData(notificacoes)
             oModel.refresh();
@@ -65,10 +81,13 @@ sap.ui.define([
         onFilasDisponibles: function(channel, event, data){
             this.addNotificacao(event, data);
 
-            let filas = data.filas;
-            console.log(filas);
+            let oModel = this.getModel('turno')
+            oModel.setData({});
+            oModel.refresh();
 
-            let oModel = this.getModel();
+            let filas = data.filas;
+
+            oModel = this.getModel();
             oModel.setData(filas);
             oModel.refresh();
 
@@ -84,9 +103,12 @@ sap.ui.define([
         onQrCode: function(channel, event, data){
 			this.addNotificacao(event, data);
 
+            let oModel = this.getModel('turno')
+            oModel.setData({});
+            oModel.refresh();
+
             let qrcode = data.qrcode;
-            MessageToast.show(qrcode);
-            let oModel = this.getModel('view');
+            oModel = this.getModel('view');
             let view = oModel.getData();
             view.qrcode.qrcode = qrcode;
             oModel.refresh();
@@ -96,8 +118,12 @@ sap.ui.define([
 
         onTurnoAtivo: function(channel, event, data){
 			this.addNotificacao(event, data);
-
             let turno = data.turno;
+            let oModel = this.getModel('turno')
+            oModel.setData(turno);
+            oModel.refresh();
+            this.setQrCodeVisible(false);
+            this.setFormVisible(false);
         },
 
         setQrCodeVisible(visible=true){
@@ -118,7 +144,7 @@ sap.ui.define([
             let view = this.getModel('view').getData();
             Cliente.getInstance().entrarNaFila(view.form.fila,
                 view.qrcode.qrcode);
-            this.setQrCodeVisible();
+            this.setQrCodeVisible(false);
             this.setFormVisible(false);
         },
 
