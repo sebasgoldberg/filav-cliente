@@ -40,6 +40,16 @@
           <mvc:XMLView viewName="iamsoft.filav.cliente.view.EsperandoNaFila"/>
 
         </content>
+
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button text="Sair da Fila" type="Reject"
+                    press="onSairDaFila" visible='{view>/sairDaFilaButtonVisible}'/>
+				<Button text="Atualizar" press="onAtualizar"/>
+			</Toolbar>
+		</footer>
+
       </Page>
     </pages>
 	</App>

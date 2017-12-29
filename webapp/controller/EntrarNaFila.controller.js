@@ -65,6 +65,21 @@ sap.ui.define([
             };
         },
 
+        estaNaFila: function(turno){
+            return turno&&turno.estado==1;
+        },
+
+        foiChamadoNoPosto: function(turno){
+            return turno&&turno.estado==3;
+        },
+
+        setSairDaFilaButtonVisible: function(visible=true){
+            let oModel = this.getModel('view');
+            let view = oModel.getData();
+            view.sairDaFilaButtonVisible = visible;
+            oModel.refresh();
+        },
+
         addNotificacao: function(event, data){
             let oModel = this.getModel('notificacoes');
             let notificacoes = oModel.getData();
@@ -72,7 +87,7 @@ sap.ui.define([
                 title: event,
                 description: this.getDescricaoNotificacao(event, data),
                 datetime: String(Date()),
-                priority: data.turno&&data.turno.estado==3?"Medium":"Low",
+                priority: this.foiChamadoNoPosto(data.turno)?"Medium":"Low",
                 });
             oModel.setData(notificacoes)
             oModel.refresh();
@@ -91,13 +106,9 @@ sap.ui.define([
             oModel.setData(filas);
             oModel.refresh();
 
-            oModel = this.getModel('view');
-            let view = oModel.getData();
-            view.form.fila = '';
-            oModel.refresh();
-
             this.setQrCodeVisible(false);
             this.setFormVisible();
+            this.setSairDaFilaButtonVisible(false);
         },
 
         onQrCode: function(channel, event, data){
@@ -114,6 +125,7 @@ sap.ui.define([
             oModel.refresh();
             this.setQrCodeVisible();
             this.setFormVisible(false);
+            this.setSairDaFilaButtonVisible(false)
         },
 
         onTurnoAtivo: function(channel, event, data){
@@ -124,6 +136,7 @@ sap.ui.define([
             oModel.refresh();
             this.setQrCodeVisible(false);
             this.setFormVisible(false);
+            this.setSairDaFilaButtonVisible(this.estaNaFila(turno))
         },
 
         setQrCodeVisible(visible=true){
@@ -146,11 +159,22 @@ sap.ui.define([
                 view.qrcode.qrcode);
             this.setQrCodeVisible(false);
             this.setFormVisible(false);
+            this.setSairDaFilaButtonVisible(false);
         },
 
         onCancelar(oEvent){
             this.setQrCodeVisible();
             this.setFormVisible(false);
+            this.setSairDaFilaButtonVisible(false);
+        },
+
+        onSairDaFila(oEvent){
+            Cliente.getInstance().sairDaFila(
+                this.getModel('turno').getData().id);
+        },
+
+        onAtualizar(oEvent){
+            Cliente.getInstance().atualizar();
         },
 
 	});

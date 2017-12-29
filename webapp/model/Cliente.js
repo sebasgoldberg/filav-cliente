@@ -24,6 +24,14 @@ sap.ui.define([
 			this._socket.send({message: 'ENTRAR_NA_FILA',  data: {fila: fila, qrcode: qrcode}})
 		},
 
+        sairDaFila: function(turno){
+			this._socket.send({message: 'SAIR_DA_FILA',  data: {turno: turno}});
+        },
+
+        atualizar: function(turno){
+			this._socket.send({message: 'GET_ESTADO',  data: {}});
+        },
+
 	});
 
 	return {
