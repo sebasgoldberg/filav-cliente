@@ -5,6 +5,8 @@ sap.ui.define([], function () {
     let NA_FILA=1;
     let CLIENTE_CHAMADO=3;
     let NO_ATENDIMENTO=4
+    let AUSENTE=5
+    let ATENDIDO=6
 
 	return {
 
@@ -28,12 +30,12 @@ sap.ui.define([], function () {
 
 		turnoStatusState: function (oTurno) {
             switch (oTurno.estado){
-                case NA_FILA:
+                case NA_FILA || NO_ATENDIMENTO || ATENDIDO:
                     return "Success";
                 case CLIENTE_CHAMADO:
                     return "Warning";
-                case NO_ATENDIMENTO:
-                    return "Success";
+                case AUSENTE:
+                    return 'Error';
             }
 			return "None";
 		},

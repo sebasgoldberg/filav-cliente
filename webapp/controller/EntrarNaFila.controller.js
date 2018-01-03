@@ -27,7 +27,10 @@ sap.ui.define([
                 qrcode: {
                     visible: false,
                     qrcode: "",
-                }
+                },
+                header: {
+                    visible: false,
+                },
             });
             this.getView().setModel(oModel, 'view');
             this.getView().bindElement({path: '/', model: 'view'})
@@ -59,8 +62,8 @@ sap.ui.define([
                     return "Para entrar numa fila, por favor passar "+
                     "o codigo QR por algum dos scanners disponiveis.";
                 case 'TURNO_ATIVO':
-                    return "Você já tem turno para ser atendido, o "+
-                    "estado atual é: "+data.turno.texto_estado;
+                    return "O estado de seu turno é: "+
+                        data.turno.texto_estado;
                 case 'FILAS_DISPONIBLES':
                     return "Por favor selecione a fila em que você "+
                         "deseja ingressar."
@@ -82,6 +85,16 @@ sap.ui.define([
             oModel.refresh();
         },
 
+        getPrioridadeNotificacao: function(turno){
+            if (!turno)
+                return 'Low';
+            if (turno.estado == 3)
+                return 'Medium';
+            if (turno.estado == 5)
+                return 'High';
+            return 'Low';
+        },
+
         addNotificacao: function(event, data){
             let oModel = this.getModel('notificacoes');
             let notificacoes = oModel.getData();
@@ -89,7 +102,7 @@ sap.ui.define([
                 title: event,
                 description: this.getDescricaoNotificacao(event, data),
                 datetime: String(Date()),
-                priority: this.foiChamadoNoPosto(data.turno)?"Medium":"Low",
+                priority: this.getPrioridadeNotificacao(data.turno),
                 });
             oModel.setData(notificacoes)
             oModel.refresh();
@@ -111,6 +124,7 @@ sap.ui.define([
             this.setQrCodeVisible(false);
             this.setFormVisible();
             this.setSairDaFilaButtonVisible(false);
+            this.setHeaderVisible(false);
         },
 
         onQrCode: function(channel, event, data){
@@ -128,6 +142,7 @@ sap.ui.define([
             this.setQrCodeVisible();
             this.setFormVisible(false);
             this.setSairDaFilaButtonVisible(false)
+            this.setHeaderVisible(false);
         },
 
         onTurnoAtivo: function(channel, event, data){
@@ -139,12 +154,20 @@ sap.ui.define([
             this.setQrCodeVisible(false);
             this.setFormVisible(false);
             this.setSairDaFilaButtonVisible(this.estaNaFila(turno))
+            this.setHeaderVisible();
         },
 
         setQrCodeVisible(visible=true){
             let oModel = this.getModel('view');
             let view = oModel.getData();
             view.qrcode.visible = visible;
+            oModel.refresh();
+        },
+
+        setHeaderVisible(visible=true){
+            let oModel = this.getModel('view');
+            let view = oModel.getData();
+            view.header.visible = visible;
             oModel.refresh();
         },
 

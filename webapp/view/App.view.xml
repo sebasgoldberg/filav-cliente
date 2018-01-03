@@ -16,6 +16,7 @@
             formatter: '.formatter.turnoStatusTitle'
             }"
 		number="{turno>posicao}º Posição"
+        visible="{view>/header/visible}"
 		numberUnit="" >
 		<statuses>
 			<ObjectStatus
