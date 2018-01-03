@@ -33,7 +33,6 @@
 			<ObjectAttribute text="Local: {turno>fila/local/nome}" />
 			<ObjectAttribute text="Fila: {turno>fila/nome}" />
 			<ObjectAttribute text="Posto: {turno>posto/nome}" />
-			<ObjectAttribute text="Ingresso: {turno>creation_date}" />
 		</attributes>
 	</ObjectHeader>
 
