@@ -1,44 +1,44 @@
-sap.ui.define([], function () {
+sap.ui.define([
+    'iamsoft/filav/cliente/model/Cliente',
+], function (Cliente) {
 
-	"use strict";
+    'use strict';
 
-    let NA_FILA=1;
-    let CLIENTE_CHAMADO=3;
-    let NO_ATENDIMENTO=4
-    let AUSENTE=5
-    let ATENDIDO=6
+    let ESTADOS_TURNO = Cliente.ESTADOS_TURNO;
 
-	return {
+    return {
 
-		turnoStatusTitle: function (oTurno) {
+        turnoStatusTitle: function (oTurno) {
             switch (oTurno.estado){
-                case NA_FILA:
-                    return "Você esta na fila";
-                case CLIENTE_CHAMADO:
-                    return "Atenção: você foi chamado no posto "+oTurno.posto.nome
-                case NO_ATENDIMENTO:
-                    return "Você esta no atendimento";
+            case ESTADOS_TURNO.NA_FILA:
+                return 'Você esta na fila';
+            case ESTADOS_TURNO.CLIENTE_CHAMADO:
+                return 'Atenção: você foi chamado no posto '+oTurno.posto.nome;
+            case ESTADOS_TURNO.NO_ATENDIMENTO:
+                return 'Você esta no atendimento';
             }
-            return "Não está em nenhuma fila"
-		},
+            return 'Não está em nenhuma fila';
+        },
 
-		turnoStatusText: function (oTurno) {
+        turnoStatusText: function (oTurno) {
             if (!oTurno.texto_estado)
-                return "Sem fila"
-            return oTurno.texto_estado
-		},
+                return 'Sem fila';
+            return oTurno.texto_estado;
+        },
 
-		turnoStatusState: function (oTurno) {
+        turnoStatusState: function (oTurno) {
             switch (oTurno.estado){
-                case NA_FILA || NO_ATENDIMENTO || ATENDIDO:
-                    return "Success";
-                case CLIENTE_CHAMADO:
-                    return "Warning";
-                case AUSENTE:
-                    return 'Error';
+            case ESTADOS_TURNO.NA_FILA ||
+                ESTADOS_TURNO.NO_ATENDIMENTO ||
+                ESTADOS_TURNO.ATENDIDO:
+                return 'Success';
+            case ESTADOS_TURNO.CLIENTE_CHAMADO:
+                return 'Warning';
+            case ESTADOS_TURNO.AUSENTE:
+                return 'Error';
             }
-			return "None";
-		},
+            return 'None';
+        },
 
-	};
+    };
 });
