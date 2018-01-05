@@ -204,6 +204,10 @@ sap.ui.define([
             this.cliente.atualizar();
         },
 
+        onLogout: function(){
+            window.open('/logout','_self');
+        },
+
     });
 });
 
