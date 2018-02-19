@@ -26,7 +26,7 @@
             }"
 		number="{turno>posicao}º Posição"
         visible="{view>/header/visible}"
-		numberUnit="" >
+		numberUnit="Estima {turno>espera_estimada} minutos" >
 		<statuses>
 			<ObjectStatus
 				text="{
