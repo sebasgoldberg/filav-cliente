@@ -155,7 +155,7 @@ sap.ui.define([
             oModel.refresh();
             this.setQrCodeVisible(false);
             this.setFormVisible(false);
-            this.setSairDaFilaButtonVisible(this.estaNaFila(turno));
+            this.setSairDaFilaButtonVisible(this.estaNaFila(turno) || this.foiChamadoNoPosto(turno));
             this.setHeaderVisible();
         },
 
